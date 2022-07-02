@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django_extensions',
+    'rest_framework',
     #Local
     'csms_api',
 ]
@@ -76,8 +78,6 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        # 'HOST': os.environ.get("DB_HOST"),
-        # 'HOST': 'csms_db',
         # To access DB docker container, DB host name should be the same as container name:
         'HOST': os.environ.get('DB_NAME'),
         'PORT': os.environ.get('DB_PORT'),
