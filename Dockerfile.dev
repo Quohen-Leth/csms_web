@@ -1,0 +1,33 @@
+FROM python:3.8-slim-buster
+
+EXPOSE 3000
+
+ENV PYTHONUNBUFFERED=1 \
+    PORT=3000 \
+    PYTHONDONTWRITEBYTECODE=1
+
+RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+    apt-utils \
+    gcc \
+    # for psycopg:
+    build-essential \
+    libpq5 \
+    libpq-dev \
+    # for postgis:
+    python3-dev \
+    musl-dev \
+    binutils \
+    netcat \
+    python3-gdal \
+    gdal-bin \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install -U pip
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+WORKDIR /code
+
+COPY . /code
+

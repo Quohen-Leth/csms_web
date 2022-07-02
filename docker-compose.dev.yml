@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+    db:
+        image: postgis/postgis:14-3.2
+        container_name: ${DB_NAME}
+        restart: always
+        ports:
+            - ${DB_PORT}:${DB_PORT}
+        volumes:
+            - postgis_volume:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${DB_NAME}
+        command: -p ${DB_PORT}
+        networks:
+            - backend_network
+
+    web:
+        env_file: .env
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: csms_web
+        restart: always
+        command: "python src/manage.py runserver 127.0.0.1:3000"
+        volumes:
+            - .:/code
+        ports:
+          - "3000:3000"
+        depends_on:
+            - db
+        networks:
+            - backend_network
+            - frontend_network
+
+volumes:
+    postgis_volume:
+
+networks:
+    frontend_network:
+    backend_network:
+         driver: bridge
