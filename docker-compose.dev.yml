@@ -24,7 +24,7 @@ services:
             dockerfile: Dockerfile.dev
         container_name: csms_web
         restart: always
-        command: "python src/manage.py runserver 127.0.0.1:3000"
+        command: "python src/manage.py runserver 0.0.0.0:3000"
         volumes:
             - .:/code
         ports:
