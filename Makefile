@@ -24,6 +24,10 @@ makemigrations: ## Make django migrations
 run: ## Run server
 	$(DC) exec web python3 src/manage.py runserver 0.0.0.0:3000
 
+.PHONY: stop
+stop: ## Stop project containers with compose
+	$(DC) stop
+
 .PHONY: down
 down: ## Reset project containers with compose
 	$(DC) down --remove-orphans
