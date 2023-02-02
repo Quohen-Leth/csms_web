@@ -6,11 +6,11 @@ help: ## Show this help
 
 .PHONY: build
 build:	## Build project with compose
-	$(DC) build --remove-orphans
+	$(DC) build
 
 .PHONY: up
 up:	## Run project with compose
-	$(DC) up -d
+	$(DC) up -d --remove-orphans
 
 .PHONY: migrate
 migrate: ## Run django migrations
