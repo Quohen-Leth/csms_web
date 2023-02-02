@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django_extensions',
     'rest_framework',
+    'rest_framework_gis',
     'django_celery_results',
     'django_celery_beat',
     'drf_spectacular',
