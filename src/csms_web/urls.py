@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from csms_api.urls import router as stations_router
+from email_notifier import urls as email_urls
 
 urlpatterns = [
-    path('', include(stations_router.urls)),
     path('admin/', admin.site.urls),
+    path('', include(email_urls)),
+    path('', include(stations_router.urls)),
 ]
